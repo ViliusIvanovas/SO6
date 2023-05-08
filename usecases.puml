@@ -14,30 +14,38 @@ package Spotify_Klient {
     usecase "Afspil musik" as afspil
     usecase "Afspil podcast" as afspilPodcast
 
+    note "Dette skridt er det vigtigste i systemet, det er her \nbrugeren får mulighed til at afspille deres indhold" as n4
+
     usecase "Få anbefalinger" as anbefal
 
-    usecase "Find fra samling" as samling
+    usecase "Indhold fra dit biblotek" as biblotek
 
-    package Find as find {
+    note "De 3 funktioner i denne kolone er alle relateret \ntil at finde, eller interegere med musik" as n2
+
+    package Indhold as indhold {
         usecase "Sange" as sang
         usecase "Albumer" as album
         usecase "Kunstnerer" as kunstner
         usecase "Playlister" as playliste
         usecase "Podcasts" as podcast
+
+        note "Indholdet i denne del er alt der som spotify \nkan anbefale eller du kan gemme i din biblotek" as n1
     }
 
-    usecase "Find kø" as kø
+    usecase "Indhold sang kø" as kø
 
     usecase "Log ud" as logud
     usecase "Åben profil" as profil
+
+    note "Proceserne i denne kolone styre alle sammen \nbrugerens tilgang til resten af programmet" as n3
 }
 
 main -up-> bruger : Hvis fejlet main
 bruger --> main : Log på forsøg
 main --> kø
 
-main --> samling
-samling -down-> find
+main --> biblotek
+biblotek -down-> indhold
 
 album --> sang
 kunstner -down-> album
@@ -50,11 +58,24 @@ kø --> afspil
 podcast -down-> afspilPodcast
 
 main --> anbefal
-anbefal -down-> find
+anbefal -down-> indhold
 
 main -left-> logud
 main -right-> profil
 
 logud --> bruger
+
+afspil -[hidden] afspilPodcast
+album -[hidden]-> podcast
+
+kunstner -[hidden]-> n1
+n1 -[hidden]-> podcast
+
+kø -[hidden] n2
+n2 -[hidden] biblotek
+
+n3 -[hidden] profil
+
+n4 -[hidden] afspilPodcast
 
 @enduml
