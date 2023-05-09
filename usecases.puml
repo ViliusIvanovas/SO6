@@ -32,7 +32,7 @@ package Spotify_Klient {
         note "Indholdet i denne del er alt der som spotify \nkan anbefale eller du kan gemme i din biblotek" as n1
     }
 
-    usecase "Indhold sang kø" as kø
+    usecase "Sang kø" as kø
 
     usecase "Log ud" as logud
     usecase "Åben profil" as profil
@@ -40,7 +40,7 @@ package Spotify_Klient {
     note "Proceserne i denne kolone styre alle sammen \nbrugerens tilgang til resten af programmet" as n3
 }
 
-main -up-> bruger : Hvis fejlet main
+main -up-> bruger : Hvis log på fejler
 bruger --> main : Log på forsøg
 main --> kø
 
