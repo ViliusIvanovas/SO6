@@ -9,7 +9,7 @@ left to right direction
 actor Bruger as bruger
 
 package Spotify_Klient {
-    usecase "Spotify" as main
+    usecase "Log in" as login
 
     usecase "Afspil musik" as afspil
     usecase "Afspil podcast" as afspilPodcast
@@ -40,11 +40,11 @@ package Spotify_Klient {
     note "Proceserne i denne kolone styre alle sammen \nbrugerens tilgang til resten af programmet" as n3
 }
 
-main -up-> bruger : Hvis log på fejler
-bruger --> main : Log på forsøg
-main --> kø
+login -up-> bruger : Error: Forkert brugernavn \neller kodeord
+bruger --> login : Log på forsøg
+login --> kø
 
-main --> biblotek
+login --> biblotek
 biblotek -down-> indhold
 
 album --> sang
@@ -57,11 +57,11 @@ kø --> afspil
 
 podcast -down-> afspilPodcast
 
-main --> anbefal
+login --> anbefal
 anbefal -down-> indhold
 
-main -left-> logud
-main -right-> profil
+login -left-> logud
+login -right-> profil
 
 logud --> bruger
 

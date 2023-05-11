@@ -1,0 +1,17 @@
+@startuml flow
+
+(*) -down-> "Log på"
+
+if "Log på:" then
+  -right->[Succes] "Some Action"
+  --> "Another Action"
+  -down-> "a"
+else
+  -left->[Fejl] "Fejlet login"
+  -->[Sendt tilbage] "Log på"
+endif
+
+"a" --> "b"
+"b" --> (*)
+
+@enduml
