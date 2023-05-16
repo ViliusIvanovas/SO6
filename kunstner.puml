@@ -1,0 +1,52 @@
+@startuml kunstner
+
+set separator ::
+
+skinparam actorStyle awesome
+
+left to right direction
+
+package Kunstnere as kunstner {
+    actor "Sangere" as sanger
+    actor "Musikere" as musiker
+    actor "Komponister" as komponist
+    actor "Tekstforfattere" as tekstforfatter
+    actor "Producer" as producer
+
+    usecase "Lave nyt indhold" as nytIndhold
+    usecase "Løn fordeling" as løn
+}
+
+sanger -[#0000ff]-> nytIndhold
+musiker -[#0000ff]-> nytIndhold
+komponist -[#0000ff]-> nytIndhold
+tekstforfatter -[#0000ff]-> nytIndhold
+producer -[#0000ff]-> nytIndhold
+nytIndhold -[#0000ff]-> producer
+
+producer -[#008000]-> løn
+løn -[#008000]-> sanger
+løn -[#008000]-> musiker
+løn -[#008000]-> komponist
+løn -[#008000]-> tekstforfatter
+
+actor Label as label
+
+usecase "Afspillet af bruger" as afspil
+
+package Indhold as indhold {
+        usecase "Sange" as sang
+        usecase "Albumer" as album
+    }
+
+producer -[#0000ff]-> label : Lave nyt indhold
+label -[#0000ff]-> indhold : Udgive indhold
+
+sang -left-> afspil
+
+album --> sang : Indeholder
+
+afspil -[#008000]-> label : Betaling for afspilning (0,003-0,005$ per afspilning)
+label -[#008000]-> producer : \nUdbetaling af indtjening (Efter aftalt %)
+
+@enduml

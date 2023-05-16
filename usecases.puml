@@ -47,10 +47,10 @@ login --> kø
 login --> biblotek
 biblotek -down-> indhold
 
-album --> sang
-kunstner -down-> album
-kunstner -down-> sang
-playliste -right-> sang
+album --> sang : Indeholder
+kunstner -down-> album : Indeholder
+kunstner -down-> sang : Indeholder
+playliste -right-> sang : Indeholder
 
 sang -down-> afspil
 kø --> afspil
